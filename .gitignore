@@ -1,0 +1,36 @@
+#OS junk files
+#Visual Studio files
+*.DS_Store
+*.ReSharper.user
+*.[Cc]ache
+*.[Oo]bj
+*.aps
+*.bak
+*.cache
+*.csproj.user
+*.exe
+*.ilk
+*.lib
+*.log
+*.ncb
+*.pch
+*.pdb
+*.resharper
+*.resharper.user
+*.sbr
+*.sdf
+*.suo
+*.tlb
+*.tlh
+*.user
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+[Tt]humbs.db
+_ReSharper.*
+obj/
+~$*
