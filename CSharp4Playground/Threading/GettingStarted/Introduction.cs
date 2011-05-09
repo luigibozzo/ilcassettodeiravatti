@@ -77,7 +77,7 @@ namespace Threading
 
 
         [Test]
-        public void SafetyThroughExclusiveLocks()
+        public void ThreadSafetyThroughExclusiveLocks()
         {
             new Thread(AquireLockAndDo).Start();
             AquireLockAndDo();
