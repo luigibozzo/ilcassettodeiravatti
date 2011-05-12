@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -51,14 +52,37 @@ namespace Threading.GettingStarted
                 Console.WriteLine("Got: " + result);
             }
         }
+
         [TestFixture]
         public class WithoutTPL
         {
             [Test]
-            public void Test2()
+            public void Using_QueueUserWorkItem()
             {
-                Assert.Fail("Ko");
+                ThreadPool.QueueUserWorkItem(Go);
+                ThreadPool.QueueUserWorkItem(Go, 123);
+
             }
+            void Go(object data)   // data will be null with the first call.
+            {   Console.WriteLine("Hello from the thread pool! " + data);   }
+
+
+            [Test]
+            public void Using_async_delegates_in_order_to_be_able_to_pass_typed_args_and_get_back_typed_results_too()
+            // Furthermore, unhandled exceptions on asynchronous delegates are conveniently rethrown (marshalled back...) on the original thread 
+            // (or more accurately, the thread that calls EndInvoke), and so they don’t need explicit handling.
+            {
+                Func<string, int> method = Work;
+                IAsyncResult cookie = method.BeginInvoke("test", null, null);
+                //
+                // ... here's where we can do other work in parallel...
+                //
+                int result = method.EndInvoke(cookie);
+                Console.WriteLine("String length is: " + result);
+            }
+            int Work(string s) { return s.Length; }
         }
+
+      
     }
 }
